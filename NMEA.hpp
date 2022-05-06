@@ -3,8 +3,6 @@
 /*
  * Format of HDM Message
  * $--HDM,x.x,M*hh
- * 
- * 
  */
 
 const char* sourceID = "HC"; //Heading Compass
@@ -41,8 +39,24 @@ class NMEAmessage {
 
 class HDMmessage : public NMEAmessage {
   public:
-    HDMmessage(float heading) {
-      sprintf(msgString,"$%sHDM,%03d,M",sourceID, static_cast<int>(std::round(heading))); 
+    HDMmessage(short heading=0) {
+      sprintf(msgString,"$%sHDM,%03d,M",sourceID, heading); 
+      addCheckSum();
+    }
+    void update(short heading) {
+      sprintf(msgString,"$%sHDM,%03d,M",sourceID, heading); 
+      addCheckSum();
+    }
+};
+
+class HSCmessage : public NMEAmessage {
+  public:
+    HSCmessage(short targetHeading=0) {
+      sprintf(msgString,"$%sHSC,000T,%03d,M",sourceID, targetHeading); 
+      addCheckSum();
+    }
+    void update(short newHeading) {
+      sprintf(msgString,"$%sHSC,000T,%03d,M",sourceID, newHeading); 
       addCheckSum();
     }
 };
