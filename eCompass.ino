@@ -1,6 +1,6 @@
 /*
  - Electronic Compass
- - RK Whitehouse Jan 2022
+ - RK Whitehouse May 2022
  
 */
 
